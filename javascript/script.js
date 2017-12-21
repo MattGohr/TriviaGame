@@ -6,44 +6,78 @@ var secRemaining = 30;
 //  the "run" function
 var intervalId;
 
-//  variable that will have all question
-var questions = [
-"Who was the first fighter to wear UFC gold in two different weight classes?",
-"What is the name of the company that owns the UFC?",
-"How did Tim Sylvia lose against Frank Mir?",
-"What is Big John McCarthy's famous fighting phrase?",
-"Who holds the record for consecutive wins inside the Octagon?"
-];
-
 
 //  This will hold the answers objects
-var answerSets = {
-  set1: {
-    q1: ["The sky is blue.", false],
-    q2: ["There are 365 days in a year.", false],
-    q3: ["There are 42 ounces in a pound.", false],
-    q4: ["The Declaration of Independence was created in 1745.", true]
-  },
-  set2: {
-    q1: ["The sky is blue.", false],
-    q2: ["There are 365 days in a year.", false],
-    q3: ["There are 42 ounces in a pound.", false],
-    q4: ["The Declaration of Independence was created in 1745.", true]
-  },
-  set3: {
-    q1: ["The sky is blue.", false],
-    q2: ["There are 365 days in a year.", false],
-    q3: ["There are 42 ounces in a pound.", false],
-    q4: ["The Declaration of Independence was created in 1745.", true]
-  },
-  set4: {
-    q1: ["The sky is blue.", false],
-    q2: ["There are 365 days in a year.", false],
-    q3: ["There are 42 ounces in a pound.", false],
-    q4: ["The Declaration of Independence was created in 1745.", true]
-  }
-};
+var triviaSets = [
+  {
+    question : "Who was the first fighter to wear UFC gold in two different weight classes?",
+    option:[
+      {
+        text: "Randy.",
+        correct: false},
+      {
+        text: "There are 365 days in a year.",
+        correct: true},
+      {
+        text: "There are 42 ounces in a pound.",
+        correct: false},
+      {
+        text: "The Declaration of Independence was created in 1745.",
+        answer: false}
+  ]},
+  {
+    question : "Who was the first fighter to wear UFC gold in two different weight classes?",
+    option:[
+      {
+        text: "The sky is GREEN.",
+        correct: false},
+      {
+        text: "There are 365 days in a year.",
+        correct: true},
+      {
+        text: "There are 42 ounces in a pound.",
+        correct: false},
+      {
+        text: "The Declaration of Independence was created in 1745.",
+        correct: false}
+  ]},
+  {
+    question : "Who was the first fighter to wear UFC gold in two different weight classes?",
+    option:[
+      {
+        text: "The sky is yellow.",
+        correct: false},
+      {
+        text: "There are 365 days in a year.",
+        correct: true},
+      {
+        text: "There are 42 ounces in a pound.",
+        correct: false},
+      {
+        text: "The Declaration of Independence was created in 1745.",
+        correct: false}
+  ]},
+  {
+    question : "Who was the first fighter to wear UFC gold in two different weight classes?",
+    option:[
+      {
+        text: "The sky is yellow.",
+        correct: false},
+      {
+        text: "There are 365 days in a year.",
+        correct: true},
+      {
+        text: "There are 42 ounces in a pound.",
+        correct: false},
+      {
+        text: "The Declaration of Independence was created in 1745.",
+        correct: false}
+  ]}
+];
 
+console.log(triviaSets[1].question);
+console.log(triviaSets[1].option[0].text);
+console.log(triviaSets[1].option[0].correct);
 //  When question answered need to stop
 $(".question-answer").on("click", stop);
 
@@ -73,7 +107,7 @@ function decrement() {
     stop();
 
     //  Once Loose then display on screen
-    alert("Time Up!");
+    // alert("Time Up!");
   }
 }
 
