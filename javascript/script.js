@@ -14,10 +14,10 @@ var questions = [
 "What is Big John McCarthy's famous fighting phrase?",
 "Who holds the record for consecutive wins inside the Octagon?"
 ];
-answer[1].
+
 
 //  This will hold the answers objects
-var answerSet =[
+var answerSets = {
   set1: {
     q1: ["The sky is blue.", false],
     q2: ["There are 365 days in a year.", false],
@@ -42,7 +42,7 @@ var answerSet =[
     q3: ["There are 42 ounces in a pound.", false],
     q4: ["The Declaration of Independence was created in 1745.", true]
   }
-];
+};
 
 //  When question answered need to stop
 $(".question-answer").on("click", stop);
