@@ -1,3 +1,7 @@
 .list-group-item:hover {
     background-color: lightgrey;
 }
+
+#start-container{
+  height: 100vh;
+}

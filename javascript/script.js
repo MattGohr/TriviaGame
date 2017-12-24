@@ -8,87 +8,96 @@ var intervalId;
 
 
 //  This will hold the answers objects
-var triviaSets = [
-  {
-    question : "Who was the first fighter to wear UFC gold in two different weight classes?",
-    option:[
-      {
+var triviaSets = [{
+    question: "Who was the first fighter to wear UFC gold in two different weight classes?",
+    option: [{
         text: "Randy.",
-        correct: false},
+        correct: false
+      },
       {
         text: "There are 365 days in a year.",
-        correct: true},
+        correct: true
+      },
       {
         text: "There are 42 ounces in a pound.",
-        correct: false},
+        correct: false
+      },
       {
         text: "The Declaration of Independence was created in 1745.",
-        answer: false}
-  ]},
+        answer: false
+      }
+    ]
+  },
   {
-    question : "Who was the first fighter to wear UFC gold in two different weight classes?",
-    option:[
-      {
+    question: "Who was the first fighter to wear UFC gold in two different weight classes?",
+    option: [{
         text: "The sky is GREEN.",
-        correct: false},
+        correct: false
+      },
       {
         text: "There are 365 days in a year.",
-        correct: true},
+        correct: true
+      },
       {
         text: "There are 42 ounces in a pound.",
-        correct: false},
+        correct: false
+      },
       {
         text: "The Declaration of Independence was created in 1745.",
-        correct: false}
-  ]},
+        correct: false
+      }
+    ]
+  },
   {
-    question : "Who was the first fighter to wear UFC gold in two different weight classes?",
-    option:[
-      {
+    question: "Who was the first fighter to wear UFC gold in two different weight classes?",
+    option: [{
         text: "The sky is yellow.",
-        correct: false},
+        correct: false
+      },
       {
         text: "There are 365 days in a year.",
-        correct: true},
+        correct: true
+      },
       {
         text: "There are 42 ounces in a pound.",
-        correct: false},
+        correct: false
+      },
       {
         text: "The Declaration of Independence was created in 1745.",
-        correct: false}
-  ]},
+        correct: false
+      }
+    ]
+  },
   {
-    question : "Who was the first fighter to wear UFC gold in two different weight classes?",
-    option:[
-      {
+    question: "Who was the first fighter to wear UFC gold in two different weight classes?",
+    option: [{
         text: "The sky is yellow.",
-        correct: false},
+        correct: false
+      },
       {
         text: "There are 365 days in a year.",
-        correct: true},
+        correct: true
+      },
       {
         text: "There are 42 ounces in a pound.",
-        correct: false},
+        correct: false
+      },
       {
         text: "The Declaration of Independence was created in 1745.",
-        correct: false}
-  ]}
+        correct: false
+      }
+    ]
+  }
 ];
 
 //load next question
-function next(){
+function next() {
 
 }
 
-console.log(triviaSets[1].question);
-console.log(triviaSets[1].option[0].text);
-console.log(triviaSets[1].option[0].correct);
-//  When question answered next question
-$(".answer").on("click", next());
-
 //  The run function sets an interval
 //  that runs the decrement function once a second.
-function run() {
+function runTimer() {
   intervalId = setInterval(decrement, 1000);
 }
 
@@ -122,5 +131,27 @@ function stop() {
   clearInterval(intervalId);
 }
 
-//  Execute the run function.
-run();
+function start() {
+  $("#start-container").children().hide();
+  $("#start-container").hide();
+  console.log("start ran");
+
+  $("#trivia-container").children().show();
+  $("#trivia-container").show();
+
+  //start the clock
+  runTimer();
+}
+
+$("#trivia-container").children().hide();
+$("#trivia-container").hide();
+
+console.log(triviaSets[1].question);
+console.log(triviaSets[1].option[0].text);
+console.log(triviaSets[1].option[0].correct);
+
+//  When question answered next question
+$(".answer").on("click", next());
+
+//  When question answered next question
+$("#start-btn").on("click", start());
