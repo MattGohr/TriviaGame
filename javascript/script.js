@@ -75,14 +75,16 @@ var triviaSets = [
   ]}
 ];
 
+//load next question
+function next(){
+
+}
+
 console.log(triviaSets[1].question);
 console.log(triviaSets[1].option[0].text);
 console.log(triviaSets[1].option[0].correct);
-//  When question answered need to stop
-$(".question-answer").on("click", stop);
-
-//  When the resume button gets clicked, execute the run function.
-$("#resume").on("click", run);
+//  When question answered next question
+$(".answer").on("click", next());
 
 //  The run function sets an interval
 //  that runs the decrement function once a second.
