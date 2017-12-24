@@ -6,6 +6,8 @@ var secRemaining = 30;
 //  the "run" function
 var intervalId;
 
+//set first trivia set num
+var triviaNum = 0;
 
 //  This will hold the answers objects
 var triviaSets = [{
@@ -91,13 +93,22 @@ var triviaSets = [{
 ];
 
 //load next question
-function next() {
+function pupulateQuestions() {
+  $("#question").text(triviaSets[triviaNum].question)
+  for (var i = 0; i <= 3; i++){
+    var curOption = "#option-"+i;
+    var curText = triviaSets[triviaNum].option[i].text;
+    $(curOption).text(curText);
+  }
+
+  runTimer();
 
 }
 
 //  The run function sets an interval
 //  that runs the decrement function once a second.
 function runTimer() {
+  intervalId = clearInterval(decrement)
   intervalId = setInterval(decrement, 1000);
 }
 
@@ -132,26 +143,31 @@ function stop() {
 }
 
 function start() {
+
   $("#start-container").children().hide();
+  //hide start container
   $("#start-container").hide();
   console.log("start ran");
 
+  //show  trivia container
   $("#trivia-container").children().show();
   $("#trivia-container").show();
+
+
+  //show first question
+  //run the questions loop
+
 
   //start the clock
   runTimer();
 }
 
+//hide trivia container
 $("#trivia-container").children().hide();
 $("#trivia-container").hide();
 
-console.log(triviaSets[1].question);
-console.log(triviaSets[1].option[0].text);
-console.log(triviaSets[1].option[0].correct);
+//  When question answered next question
+$(".options").on("click", pupulateQuestions);
 
 //  When question answered next question
-$(".answer").on("click", next());
-
-//  When question answered next question
-$("#start-btn").on("click", start());
+$("#start-btn").on("click", start);

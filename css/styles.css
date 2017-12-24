@@ -1,5 +1,12 @@
 .list-group-item:hover {
-    background-color: lightgrey;
+  background-color: lightgrey;
+  cursor: pointer;
+}
+
+li {
+
+  margin-top: 10px;
+
 }
 
 #start-container{
