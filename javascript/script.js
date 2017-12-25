@@ -97,6 +97,7 @@ var triviaSets = [{
 ];
 
 //load next question
+//lots of if statments here I think it's messy would like some sugestions on how to make this cleaner
 function pupulateQuestions(clickButton) {
 
   //first run or time ran out
@@ -112,7 +113,7 @@ function pupulateQuestions(clickButton) {
     optionId = optionId.substr(optionId.length - 1, 1);
     optionId = parseInt(optionId);
 
-    var curCorrect = triviaSets[triviaNum -1].option[optionId].correct
+    var curCorrect = triviaSets[triviaNum - 1].option[optionId].correct
 
     //log correct answer
     if (curCorrect === true) {
@@ -124,24 +125,33 @@ function pupulateQuestions(clickButton) {
   //last qestion
   if (triviaSets.length === triviaNum) {
 
-    //get the number of the ID cicked and turn it into a number
-    var optionId = $(this).attr('id');
-    optionId = optionId.substr(optionId.length - 1, 1);
-    optionId = parseInt(optionId);
+    //if timer ran out then skip
+    if (clickButton === false) {
+      //skip
+    }
+    else {
+      //get the number of the ID cicked and turn it into a number
+      var optionId = $(this).attr('id');
+      optionId = optionId.substr(optionId.length - 1, 1);
+      optionId = parseInt(optionId);
 
-    var curCorrect = triviaSets[triviaNum - 1].option[optionId].correct
+      var curCorrect = triviaSets[triviaNum - 1].option[optionId].correct
 
-    //log correct answer
-    if (curCorrect === true) {
-      countCorrect++;
+      //log correct answer
+      if (curCorrect === true) {
+        countCorrect++;
+      }
     }
 
     //calculate score
     score = Math.floor((countCorrect / triviaSets.length) * 100);
-    console.log(score);
 
     //remove questions
     $("#answers-row").children().remove();
+
+    //remove Timer
+    $("#timer").children().remove();
+    $("#timer").remove();
 
     //your score is
     $("#question").text("You're score is!")
@@ -153,27 +163,29 @@ function pupulateQuestions(clickButton) {
 
     $("#answers-row").append(a);
 
-    // break;
+    clearInterval(intervalId);
 
   }
+  else {
 
-  //display question
-  $("#question").text(triviaSets[triviaNum].question)
+    //display question
+    $("#question").text(triviaSets[triviaNum].question)
 
-  //print options
-  for (var i = 0; i <= 3; i++) {
-    var curOption = "#option-" + i;
-    var curText = triviaSets[triviaNum].option[i].text;
-    $(curOption).text(curText);
+    //print options
+    for (var i = 0; i <= 3; i++) {
+      var curOption = "#option-" + i;
+      var curText = triviaSets[triviaNum].option[i].text;
+      $(curOption).text(curText);
+    }
+
+    //next trivia number
+    triviaNum++;
+
+    //reset timer
+    runTimer();
+
+    console.log("count correct : " + countCorrect);
   }
-
-  //next trivia number
-  triviaNum++;
-
-  //reset timer
-  runTimer();
-
-  console.log("count correct : " + countCorrect);
 
 }
 
