@@ -4,11 +4,19 @@
 }
 
 li {
-
   margin-top: 10px;
-
 }
 
+.container {
+  margin: 5% auto;
+  background-color: gold;
+  height: 75vh;
+}
 .height-40 {
   height: 40vh;
+}
+
+body {
+  background-image: url("https://cdn.vox-cdn.com/thumbor/izifPLrtwEMIdo2GP-WzZIOxGQ4=/8x0:3461x2302/1200x800/filters:focal(8x0:3461x2302)/cdn.vox-cdn.com/uploads/chorus_image/image/48942749/usa-today-7744196.0.jpg");
+  background-size: cover;
 }
