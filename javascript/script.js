@@ -9,83 +9,86 @@ var intervalId;
 //set first trivia set num
 var triviaNum = 0;
 
+//count of corect variale
+countCorrect = 0;
+
 //  This will hold the answers objects
 var triviaSets = [{
     question: "Who was the first fighter to wear UFC gold in two different weight classes?",
     option: [{
-        text: "Randy.",
-        correct: false
-      },
-      {
-        text: "There are 365 days in a year.",
+        text: "Randy Couture",
         correct: true
       },
       {
-        text: "There are 42 ounces in a pound.",
+        text: "Connor McGregor",
         correct: false
       },
       {
-        text: "The Declaration of Independence was created in 1745.",
+        text: "BJ Penn",
+        correct: false
+      },
+      {
+        text: "Dana White",
         answer: false
       }
     ]
   },
   {
-    question: "Who was the first fighter to wear UFC gold in two different weight classes?",
+    question: "Who was the first UFC champion?",
     option: [{
-        text: "The sky is GREEN.",
+        text: "BJ Penn",
         correct: false
       },
       {
-        text: "There are 365 days in a year.",
+        text: "Royce Gracie",
         correct: true
       },
       {
-        text: "There are 42 ounces in a pound.",
+        text: "Conor McGregor",
         correct: false
       },
       {
-        text: "The Declaration of Independence was created in 1745.",
+        text: "Matt Hughes",
         correct: false
       }
     ]
   },
   {
-    question: "Who was the first fighter to wear UFC gold in two different weight classes?",
+    question: "Logest winning streak?",
     option: [{
-        text: "The sky is yellow.",
+        text: "Conor McGregor",
         correct: false
       },
       {
-        text: "There are 365 days in a year.",
+        text: "Matt Hughes",
+        correct: false
+      },
+      {
+        text: "Anderson Silva.",
         correct: true
       },
       {
-        text: "There are 42 ounces in a pound.",
-        correct: false
-      },
-      {
-        text: "The Declaration of Independence was created in 1745.",
+        text: "Urijah Faber",
         correct: false
       }
     ]
   },
   {
-    question: "Who was the first fighter to wear UFC gold in two different weight classes?",
+    question: "What is Big John McCarthy's favorite pre-fight catch phrase",
     option: [{
-        text: "The sky is yellow.",
-        correct: false
-      },
-      {
-        text: "There are 365 days in a year.",
+        text: "Let's get it on!",
         correct: true
       },
       {
-        text: "There are 42 ounces in a pound.",
+        text: "Fight!",
         correct: false
       },
       {
-        text: "The Declaration of Independence was created in 1745.",
+        text: "Let's go!",
+        correct: false
+      },
+      {
+        text: "Let's get ready to rumble!",
         correct: false
       }
     ]
@@ -94,21 +97,59 @@ var triviaSets = [{
 
 //load next question
 function pupulateQuestions() {
+
+
+
+  //if first run skip step
+  if (triviaNum > 0) {
+
+    //get the number of the ID cicked and turn it into a number
+    var optionId = $(this).attr('id');
+    optionId = optionId.substr(optionId.length - 1, 1);
+    optionId = parseInt(optionId);
+
+    //Check answer true or false
+    if (triviaSets[triviaNum].option[optionId].correct === true){
+      countCorrect++;
+    }
+
+  }
+
+
+  //display question
   $("#question").text(triviaSets[triviaNum].question)
+
+  //print options
   for (var i = 0; i <= 3; i++){
     var curOption = "#option-"+i;
     var curText = triviaSets[triviaNum].option[i].text;
     $(curOption).text(curText);
   }
 
+  //next trivia number
+  triviaNum++;
+
+  //reset timer
   runTimer();
+
+  console.log("count correct : " + countCorrect);
 
 }
 
 //  The run function sets an interval
 //  that runs the decrement function once a second.
 function runTimer() {
-  intervalId = clearInterval(decrement)
+
+  //reset timer to 30 secs
+  secRemaining = 30
+
+  //clear interval
+  clearInterval(intervalId);
+
+  //  Show the number in the #show-number tag.
+  $("#counter").text(secRemaining);
+
+  //start the timer
   intervalId = setInterval(decrement, 1000);
 }
 
@@ -121,15 +162,12 @@ function decrement() {
   //  Show the number in the #show-number tag.
   $("#counter").text(secRemaining);
 
-
   //  Once number hits zero...
-  if (secRemaining === 0) {
+  if (secRemaining === -1) {
 
     //  ...run the stop function.
     stop();
 
-    //  Once Loose then display on screen
-    // alert("Time Up!");
   }
 }
 
@@ -140,6 +178,10 @@ function stop() {
   //  We just pass the name of the interval
   //  to the clearInterval function.
   clearInterval(intervalId);
+
+  //log invalid answer
+
+  //load next question
 }
 
 function start() {
@@ -156,10 +198,7 @@ function start() {
 
   //show first question
   //run the questions loop
-
-
-  //start the clock
-  runTimer();
+  pupulateQuestions();
 }
 
 //hide trivia container
