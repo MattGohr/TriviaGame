@@ -10,7 +10,8 @@ var intervalId;
 var triviaNum = 0;
 
 //count of corect variale
-countCorrect = 0;
+var countCorrect = 0,
+  score;
 
 //  This will hold the answers objects
 var triviaSets = [{
@@ -96,32 +97,72 @@ var triviaSets = [{
 ];
 
 //load next question
-function pupulateQuestions() {
+function pupulateQuestions(clickButton) {
 
+  //first run or time ran out
+  if (triviaSets.length === 0 || clickButton === false) {
+    //skipp
+  }
 
-
-  //if first run skip step
-  if (triviaNum > 0) {
+  //not first and not last
+  else if (triviaNum > 0) {
 
     //get the number of the ID cicked and turn it into a number
     var optionId = $(this).attr('id');
     optionId = optionId.substr(optionId.length - 1, 1);
     optionId = parseInt(optionId);
 
-    //Check answer true or false
-    if (triviaSets[triviaNum].option[optionId].correct === true){
+    var curCorrect = triviaSets[triviaNum -1].option[optionId].correct
+
+    //log correct answer
+    if (curCorrect === true) {
       countCorrect++;
     }
 
   }
 
+  //last qestion
+  if (triviaSets.length === triviaNum) {
+
+    //get the number of the ID cicked and turn it into a number
+    var optionId = $(this).attr('id');
+    optionId = optionId.substr(optionId.length - 1, 1);
+    optionId = parseInt(optionId);
+
+    var curCorrect = triviaSets[triviaNum - 1].option[optionId].correct
+
+    //log correct answer
+    if (curCorrect === true) {
+      countCorrect++;
+    }
+
+    //calculate score
+    score = Math.floor((countCorrect / triviaSets.length) * 100);
+    console.log(score);
+
+    //remove questions
+    $("#answers-row").children().remove();
+
+    //your score is
+    $("#question").text("You're score is!")
+    $("#question").css('font-size', '24px');
+
+    var a = $("<p>");
+    a.addClass('score');
+    a.text(score + "%")
+
+    $("#answers-row").append(a);
+
+    // break;
+
+  }
 
   //display question
   $("#question").text(triviaSets[triviaNum].question)
 
   //print options
-  for (var i = 0; i <= 3; i++){
-    var curOption = "#option-"+i;
+  for (var i = 0; i <= 3; i++) {
+    var curOption = "#option-" + i;
     var curText = triviaSets[triviaNum].option[i].text;
     $(curOption).text(curText);
   }
@@ -179,9 +220,8 @@ function stop() {
   //  to the clearInterval function.
   clearInterval(intervalId);
 
-  //log invalid answer
-
   //load next question
+  pupulateQuestions(false);
 }
 
 function start() {
@@ -194,7 +234,6 @@ function start() {
   //show  trivia container
   $("#trivia-container").children().show();
   $("#trivia-container").show();
-
 
   //show first question
   //run the questions loop
